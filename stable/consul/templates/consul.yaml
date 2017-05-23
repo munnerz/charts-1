@@ -91,6 +91,12 @@ spec:
       - name: "{{ template "fullname" . }}"
         image: "{{.Values.Image}}:{{.Values.ImageTag}}"
         imagePullPolicy: "{{.Values.ImagePullPolicy}}"
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - consul
+              - leave
         ports:
         - name: http
           containerPort: {{.Values.HttpPort}}
